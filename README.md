@@ -191,3 +191,25 @@ Once connected via SSH, run the following commands to install the necessary soft
 
 * **Stopping the Server**: To stop the Flask application, return to your SSH terminal and press `Ctrl + C`.
 * **Cost Management**: This setup uses free-tier services. To prevent unexpected charges, **stop or terminate your EC2 instance** from the AWS console when you are finished.
+
+---
+
+## Screenshots
+
+Console captures for key setup steps are saved under `outputs/`.
+
+### S3 bucket folder structure
+
+![S3 bucket folder structure showing raw, processed, and enriched prefixes](outputs/Screenshot-S3-Folder-Structure.png)
+
+### IAM roles
+
+![IAM roles created for Lambda, Glue, and EC2](outputs/Screenshot-IAM-Roles.png)
+
+### Lambda function creation
+
+![Lambda function creation for FilterAndProcessOrders](outputs/Screenshot-Lambda-Creation.png)
+
+### S3 trigger on the Lambda function
+
+![S3 event trigger configured on the Lambda function for raw/ CSV uploads](outputs/Screenshot-Lambda-Trigger.png)
