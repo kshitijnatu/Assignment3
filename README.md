@@ -221,3 +221,17 @@ Console captures for key setup steps are saved under `outputs/output-screenshots
 ### Crawler and CloudWatch output
 
 ![Glue crawler run details and related CloudWatch logs](outputs/output-screenshots/Screenshot-Of-Crawler-CloudWatch.png)
+
+### Athena query results written to enriched folder
+
+![Athena query output files saved to the enriched folder](outputs/output-screenshots/Screenshot-Of-Athena-Query-Results-Enriched-Folder.png)
+
+### Final dashboard (web app) views
+
+![Athena Orders Dashboard view 1](outputs/output-screenshots/Screenshot-Of-Final-Webpage-1.png)
+
+![Athena Orders Dashboard view 2](outputs/output-screenshots/Screenshot-Of-Final-Webpage-2.png)
+
+![Athena Orders Dashboard view 3](outputs/output-screenshots/Screenshot-Of-Final-Webpage-3.png)
+
+![Athena Orders Dashboard view 4](outputs/output-screenshots/Screenshot-Of-Final-Webpage-4.png)
