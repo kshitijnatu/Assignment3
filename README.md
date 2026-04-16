@@ -194,6 +194,56 @@ Once connected via SSH, run the following commands to install the necessary soft
 
 ---
 
+## Approach and Explanations
+
+### Overall approach
+
+This solution follows a simple event-driven architecture where each AWS service handles one clear responsibility:
+
+1. **Ingest**: Raw order CSV files are uploaded into `raw/` in S3.
+2. **Transform**: A Lambda function is triggered by S3 object creation events, filters/cleans data, and writes output to `processed/`.
+3. **Catalog**: AWS Glue crawler scans the `processed/` folder and updates schema metadata in `orders_db`.
+4. **Analyze**: Athena runs SQL directly on cataloged S3 data, and writes query results to `enriched/`.
+5. **Visualize**: A Flask app running on EC2 executes Athena queries and renders results in HTML tables.
+
+This approach was chosen because it is modular, serverless for core data processing, and easy to scale without tightly coupling ingestion, processing, and reporting.
+
+### Stage-by-stage explanation
+
+- **S3 structure (`raw/`, `processed/`, `enriched/`)**: Separates lifecycle stages of data so it is easy to track source data, transformed data, and analytics output.
+- **IAM roles**: Uses least-privilege role separation (Lambda, Glue, EC2) so each service only gets the permissions it needs.
+- **Lambda trigger pattern**: New files in `raw/` automatically invoke processing, removing manual orchestration.
+- **Glue crawler + Data Catalog**: Eliminates manual schema management and keeps Athena table metadata synchronized with processed data.
+- **Athena over S3**: Enables SQL analytics without provisioning or managing a database server.
+- **EC2 + Flask dashboard**: Provides a lightweight, real-time presentation layer for query outputs.
+
+### Query approach and purpose
+
+The dashboard includes five business-oriented queries, each designed to answer a specific analytical question:
+
+1. **Total Sales by Customer**  
+   Aggregates `SUM(Amount)` by customer to identify top revenue contributors.
+
+2. **Monthly Order Volume and Revenue**  
+   Groups by `DATE_TRUNC('month', OrderDate)` to analyze seasonality and month-over-month business activity.
+
+3. **Order Status Dashboard**  
+   Summarizes order counts and value by status to monitor fulfillment pipeline health.
+
+4. **Average Order Value (AOV) per Customer**  
+   Uses `AVG(Amount)` to compare customer purchasing behavior and detect high-value accounts.
+
+5. **Top 10 Largest Orders in February 2025**  
+   Filters a specific time window and ranks by `Amount` to quickly surface high-impact transactions.
+
+### Operational notes and assumptions
+
+- The Athena database is `orders_db` and the table queried by the web app is `processed`.
+- The S3 location configured for Athena query output is `s3://6190assignment3bucket/processed/`.
+- For production use, you should usually store Athena query output in a separate prefix (for example `enriched/`) to avoid mixing transformed source data and query result files.
+
+---
+
 ## Screenshots
 
 Console captures for key setup steps are saved under `outputs/output-screenshots/`.
