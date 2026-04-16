@@ -196,20 +196,20 @@ Once connected via SSH, run the following commands to install the necessary soft
 
 ## Screenshots
 
-Console captures for key setup steps are saved under `outputs/`.
+Console captures for key setup steps are saved under `outputs/output-screenshots/`.
 
 ### S3 bucket folder structure
 
-![S3 bucket folder structure showing raw, processed, and enriched prefixes](outputs/Screenshot-S3-Folder-Structure.png)
+![S3 bucket folder structure showing raw, processed, and enriched prefixes](outputs/output-screenshots/Screenshot-S3-Folder-Structure.png)
 
 ### IAM roles
 
-![IAM roles created for Lambda, Glue, and EC2](outputs/Screenshot-IAM-Roles.png)
+![IAM roles created for Lambda, Glue, and EC2](outputs/output-screenshots/Screenshot-IAM-Roles.png)
 
 ### Lambda function creation
 
-![Lambda function creation for FilterAndProcessOrders](outputs/Screenshot-Lambda-Creation.png)
+![Lambda function creation for FilterAndProcessOrders](outputs/output-screenshots/Screenshot-Lambda-Creation.png)
 
 ### S3 trigger on the Lambda function
 
-![S3 event trigger configured on the Lambda function for raw/ CSV uploads](outputs/Screenshot-Lambda-Trigger.png)
+![S3 event trigger configured on the Lambda function for raw/ CSV uploads](outputs/output-screenshots/Screenshot-Lambda-Trigger.png)
